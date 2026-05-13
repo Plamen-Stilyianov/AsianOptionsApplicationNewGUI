@@ -1,3 +1,12 @@
+/**
+ * Created by IntelliJ IDEA.
+ * Author: Plamen Stilyianov
+ * Title: MSc Financial Markets with Information Systems
+ * Date: 02-Sep-2005
+ * Time: 00:10:17
+ * To change this template use File | Settings | File Templates.
+ */
+
 public class GeometricModels {
 
     public double delta, gamma, vega, rho, theta = 0.0;
