@@ -59,3 +59,41 @@ To execute the compiled project and launch the desktop options pricing calculato
 mvn exec:java -Dexec.mainClass="AsianOptionFrame"
 ```
 ![pricer_new_gui.png](images/pricer_new_gui.png)
+
+---
+
+## 🏛️ Empirical Validation & Bloomberg Terminal Benchmarks
+
+The inputs and valuation outputs in this application are empirically verified against live **Bloomberg Terminal** option pricing screens (`OVX` and `OV`) using market data for **IBM (`IBM LN Equity`)** on the London Stock Exchange.
+
+### Reference Market Parameters (`IBM LN Equity`)
+* **Underlying Spot Price ($S$):** `4493` GBp
+* **Strike Price ($K$):** `4493` GBp *(100.000% ATM)*
+* **Time to Expiration ($T$):** `90` days (`0.24658` years; Trade Date `8/30/05` to Expiration `11/28/05`)
+* **Risk-Free Interest Rate ($r$):** `4.314%` *(Semiannual)*
+* **Continuous Dividend Yield ($d$):** `0.87%`
+* **Volatility ($\sigma$):** `21.097%`
+* **Averaging Schedule:** `65` discrete, unweighted observation points
+
+### Bloomberg Terminal Benchmark Results
+
+| Bloomberg Screen & Model | Option Price (GBp) | Delta ($\Delta$) | Gamma ($\Gamma$) | Vega ($
+u$) | Rho ($
+ho$) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Asian Option (`OVX`) — Discrete Arithmetic** | `115.7449` | `0.56865` | `0.00146` | `5.02953` | — |
+| **Asian Option (`OVX`) — Discrete Geometric** | `113.3578` | `0.50583` | `0.00147` | `4.80555` | — |
+| **Standard Option (`OV`) — Black-Scholes (Continuous Div.)** | `205.9299` | `0.55150` | `0.00084` | `8.80944` | `561.25610` |
+| **Standard Option (`OV`) — Trinomial (Discrete Div.)** | `206.1733` | `0.55172` | `0.00084` | `8.82145` | `554.07025` |
+
+### Bloomberg Terminal Verification Screens
+
+#### 1. Asian Option Valuation (`OVX`) — Arithmetic vs. Geometric
+| Discrete Arithmetic Average (`115.7449`) | Discrete Geometric Average (`113.3578`) |
+| :---: | :---: |
+| ![Bloomberg Arithmetic Asian Option](images/asian_option_aritmetic.png) | ![Bloomberg Geometric Asian Option](images/asian_option_geometric.png) |
+
+#### 2. Standard European Option Valuation (`OV`) — Vanilla Reference Benchmarks
+| Black-Scholes Continuous Dividends (`205.9299`) | Trinomial Discrete Dividends (`206.1733`) |
+| :---: | :---: |
+| ![Bloomberg Standard Black-Scholes](images/standard_option_bs.png) | ![Bloomberg Standard Enhanced Dividends](images/standard_option_enhanced_dividents.png) |
